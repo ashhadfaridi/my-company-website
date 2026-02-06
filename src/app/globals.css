@@ -48,51 +48,16 @@
   /* Background and Foreground */
   --background: 9 9 11;              /* neutral-950 */
   --foreground: 250 250 250;         /* neutral-50 */
-}
-
-@theme inline {
-  /* Colors */
-  --color-background: rgb(var(--background));
-  --color-foreground: rgb(var(--foreground));
-
-  /* Primary palette */
-  --color-primary-*: rgb(var(--color-primary-*));
-
-  /* Accent palette */
-  --color-accent-*: rgb(var(--color-accent-*));
-
-  /* Neutral palette */
-  --color-neutral-*: rgb(var(--color-neutral-*));
-
-  /* Semantic colors */
-  --color-success: rgb(var(--color-success));
-  --color-warning: rgb(var(--color-warning));
-  --color-error: rgb(var(--color-error));
-  --color-info: rgb(var(--color-info));
 
   /* Typography */
-  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-
-  /* Fluid Typography Scale */
-  --font-size-display-xl: clamp(3.5rem, 8vw, 6rem);
-  --font-size-display-lg: clamp(3rem, 6vw, 4.5rem);
-  --font-size-display-md: clamp(2.5rem, 5vw, 3.5rem);
-  --font-size-heading-xl: clamp(2rem, 4vw, 3rem);
-  --font-size-heading-lg: clamp(1.75rem, 3vw, 2.25rem);
-  --font-size-heading-md: clamp(1.5rem, 2.5vw, 1.875rem);
-  --font-size-heading-sm: clamp(1.25rem, 2vw, 1.5rem);
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   /* Shadows for glow effects */
   --shadow-glow-primary: 0 0 20px rgba(0, 188, 255, 0.5);
   --shadow-glow-accent: 0 0 20px rgba(212, 18, 255, 0.5);
   --shadow-glow-primary-lg: 0 0 40px rgba(0, 188, 255, 0.6);
   --shadow-glow-accent-lg: 0 0 40px rgba(212, 18, 255, 0.6);
-
-  /* Border radius */
-  --radius: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
 }
 
 /* Custom animations */
@@ -138,8 +103,8 @@ html {
 }
 
 body {
-  background: rgb(var(--background));
-  color: rgb(var(--foreground));
+  background: rgb(var(--color-neutral-950));
+  color: rgb(var(--color-neutral-50));
   font-family: var(--font-sans);
   margin: 0;
   padding: 0;
@@ -152,12 +117,113 @@ html {
 
 /* Selection colors */
 ::selection {
-  background-color: rgb(var(--color-primary-500) / 0.3);
-  color: rgb(var(--foreground));
+  background-color: rgba(0, 188, 255, 0.3);
+  color: rgb(var(--color-neutral-50));
 }
 
 /* Focus styles */
 :focus-visible {
   outline: 2px solid rgb(var(--color-primary-500));
   outline-offset: 2px;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Gradient backgrounds */
+.gradient-bg-primary {
+  background: linear-gradient(135deg, rgb(var(--color-primary-600)), rgb(var(--color-accent-600)));
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.gradient-bg-radial {
+  background: radial-gradient(circle at 50% 0%, rgba(0, 188, 255, 0.2), transparent 50%),
+              radial-gradient(circle at 0% 100%, rgba(212, 18, 255, 0.2), transparent 50%);
+}
+
+.gradient-bg-hero {
+  background: radial-gradient(circle at 20% 20%, rgba(0, 188, 255, 0.15), transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(212, 18, 255, 0.15), transparent 40%),
+              rgb(var(--color-neutral-950));
+}
+
+/* Text gradient */
+.text-gradient {
+  background: linear-gradient(90deg, rgb(var(--color-primary-400)), rgb(var(--color-accent-400)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-animated {
+  background: linear-gradient(90deg,
+    rgb(var(--color-primary-400)),
+    rgb(var(--color-accent-400)),
+    rgb(var(--color-primary-400))
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s linear infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-neutral-900));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-primary-600));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-primary-500));
+}
+
+/* Glow on hover utility */
+.glow-on-hover {
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  box-shadow: var(--shadow-glow-primary-lg);
+}
+
+/* Border gradient utility */
+.border-gradient {
+  position: relative;
+  background: rgb(var(--color-neutral-950));
+  background-clip: padding-box;
+}
+
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgb(var(--color-primary-500)), rgb(var(--color-accent-500)));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
