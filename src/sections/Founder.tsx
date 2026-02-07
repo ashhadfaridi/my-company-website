@@ -1,16 +1,46 @@
 'use client'
 
+import { useEffect } from 'react'
 import { SlideUp, FadeIn } from '@/components/animations'
 import Button from '@/components/ui/Button'
 import { ArrowRight, Linkedin, Twitter, Calendar } from 'lucide-react'
+import { getCalApi } from '@calcom/embed-react'
+
+// Cal.com configuration
+const CAL_LINK = 'savage-bfeykg/15min'
 
 /**
  * Meet the Founder section
  * Personal touch with founder info and CTA
  */
 export default function Founder() {
+  useEffect(() => {
+    ;(async function () {
+      const cal = await getCalApi({ namespace: 'discovery' })
+      cal('ui', {
+        theme: 'dark',
+        styles: {
+          branding: { brandColor: '#00BCFF' },
+        },
+        hideEventTypeDetails: false,
+        layout: 'month_view',
+      })
+    })()
+  }, [])
+
+  const openCalModal = async () => {
+    const cal = await getCalApi({ namespace: 'discovery' })
+    cal('modal', {
+      calLink: CAL_LINK,
+      config: {
+        layout: 'month_view',
+        theme: 'dark',
+      },
+    })
+  }
+
   return (
-    <section className="py-24 px-6 relative overflow-hidden">
+    <section id="founder" className="py-24 px-6 relative overflow-hidden">
       {/* Background accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-500/5 to-transparent" />
 
@@ -85,15 +115,13 @@ export default function Founder() {
                         <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                       </Button>
                     </a>
-                    <a
-                      href="https://cal.com/savage-bfeykg/15min"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-neutral-400 hover:text-primary-400 transition-colors justify-center"
+                    <button
+                      onClick={openCalModal}
+                      className="inline-flex items-center gap-2 text-neutral-400 hover:text-primary-400 transition-colors justify-center cursor-pointer"
                     >
                       <Calendar className="h-5 w-5" />
                       <span>Book a Call</span>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </SlideUp>
