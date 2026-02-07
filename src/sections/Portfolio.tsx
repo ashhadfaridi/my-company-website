@@ -7,26 +7,35 @@ import { ArrowUpRight, Briefcase, BarChart3, ShoppingBag, Workflow } from 'lucid
 
 const PORTFOLIO_PROJECTS = [
   {
-    title: 'AI-Powered SaaS Dashboard',
-    description: 'Real-time analytics dashboard with predictive insights and automated reporting. Built with custom ML models for business forecasting.',
+    title: 'FinTech Startup Scales to 50K Users',
+    headline: 'From MVP to enterprise-ready in 6 weeks',
+    description: 'A fintech startup needed a real-time analytics dashboard to track millions of transactions. We built a custom solution with predictive AI that helped them close their Series A.',
+    challenge: 'Needed to process 2.5M+ data points daily with zero latency.',
+    result: 'Launched in 6 weeks. Now processing $10M+ in daily transactions.',
     image: 'from-primary-600 via-cyan-600 to-primary-500',
     tags: ['Next.js', 'TypeScript', 'AI/ML', 'PostgreSQL'],
     industry: 'FinTech',
     icon: BarChart3,
-    metrics: { label: 'Data Points Processed', value: '2.5M+' },
+    metrics: { label: 'Daily Transactions', value: '$10M+' },
   },
   {
-    title: 'E-Commerce Platform',
-    description: 'Modern online store with AI product recommendations, smart inventory management, and seamless checkout experience.',
+    title: 'E-Commerce Brand 3x Revenue',
+    headline: 'Redesign + AI recommendations = 340% more sales',
+    description: 'A DTC brand was losing sales to a clunky checkout flow. We rebuilt their store from scratch with AI-powered product recommendations and one-click checkout.',
+    challenge: 'Cart abandonment rate was 78%. Mobile experience was broken.',
+    result: 'Conversion rate jumped 340%. Revenue tripled in 3 months.',
     image: 'from-green-600 via-emerald-600 to-teal-500',
     tags: ['React', 'Stripe', 'AI', 'Shopify API'],
     industry: 'Retail',
     icon: ShoppingBag,
-    metrics: { label: 'Conversion Increase', value: '+340%' },
+    metrics: { label: 'Revenue Increase', value: '340%' },
   },
   {
-    title: 'Automation Hub',
-    description: 'Custom workflow automation connecting 10+ business tools and eliminating manual data entry. Saved 40+ hours per week.',
+    title: 'Agency Saves 40 Hours Per Week',
+    headline: 'Automation that paid for itself in 2 weeks',
+    description: 'A growing agency was drowning in manual tasks. We built a custom automation system connecting 10+ tools that eliminated repetitive work and freed up their team.',
+    challenge: 'Team spent 40+ hours weekly on data entry and reporting.',
+    result: 'Fully automated. ROI achieved in less than 2 weeks.',
     image: 'from-accent-600 via-purple-600 to-pink-500',
     tags: ['TypeScript', 'Zapier', 'API Integration', 'Webhooks'],
     industry: 'Operations',
@@ -56,10 +65,10 @@ export default function Portfolio() {
               <span>Our work</span>
             </div>
             <h2 className="mb-4 text-4xl font-bold text-white sm:text-5xl md:text-6xl">
-              Recent <span className="text-gradient">Projects</span>
+              Results That <span className="text-gradient">Speak</span>
             </h2>
             <p className="mx-auto max-w-2xl text-lg text-neutral-400">
-              A glimpse of what we've built for our clients.
+              Real projects. Measurable outcomes. See what we've built for teams like yours.
             </p>
           </div>
         </SlideUp>
@@ -89,13 +98,27 @@ export default function Portfolio() {
                         <span className="text-neutral-300">{project.industry}</span>
                       </div>
 
-                      <h3 className="mb-4 text-3xl md:text-4xl font-bold text-white">
+                      <h3 className="mb-2 text-3xl md:text-4xl font-bold text-white">
                         {project.title}
                       </h3>
 
-                      <p className="mb-6 text-lg text-neutral-400 leading-relaxed">
+                      <p className="mb-4 text-lg text-primary-400 font-medium">
+                        {project.headline}
+                      </p>
+
+                      <p className="mb-4 text-neutral-400 leading-relaxed">
                         {project.description}
                       </p>
+
+                      {/* Challenge & Result */}
+                      <div className="space-y-2 mb-6">
+                        <p className="text-sm text-neutral-500">
+                          <span className="font-medium text-neutral-300">Challenge:</span> {project.challenge}
+                        </p>
+                        <p className="text-sm text-green-400">
+                          <span className="font-medium">Result:</span> {project.result}
+                        </p>
+                      </div>
 
                       {/* Tech stack */}
                       <div className="flex flex-wrap gap-2 mb-6">
@@ -114,7 +137,7 @@ export default function Portfolio() {
                         href="#contact"
                         className="inline-flex items-center gap-2 text-primary-400 hover:text-primary-300 transition-colors group/link font-medium"
                       >
-                        <span>View Case Study</span>
+                        <span>Build something like this</span>
                         <ArrowUpRight className="h-5 w-5 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
                       </a>
                     </div>

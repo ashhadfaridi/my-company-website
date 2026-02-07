@@ -3,13 +3,20 @@
 import Button from '@/components/ui/Button'
 import TypewriterText from '@/components/ui/TypewriterText'
 import { SlideUp, FadeIn } from '@/components/animations'
-import { Sparkles, ArrowRight, BarChart3, ShoppingBag, Bot, Code2 } from 'lucide-react'
+import { Sparkles, ArrowRight, BarChart3, ShoppingBag, Bot, Code2, Star, CheckCircle2 } from 'lucide-react'
 
 const ROTATING_WORDS = [
-  'SaaS Dashboards',
-  'E-Commerce Stores',
-  'AI Automations',
-  'Web Applications',
+  'in 2 Weeks',
+  'That Convert',
+  'That Scale',
+  'On Time',
+]
+
+// Social proof data
+const QUICK_STATS = [
+  { value: '50+', label: 'Projects Delivered' },
+  { value: '< 2 weeks', label: 'Avg. Launch Time' },
+  { value: '100%', label: 'Client Satisfaction' },
 ]
 
 /**
@@ -38,38 +45,46 @@ export default function Hero() {
           <div className="text-center lg:text-left">
             <FadeIn>
               <div className="mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-sm text-neutral-300">
-                <Sparkles className="h-4 w-4 text-primary-400" />
-                <span>AI-Powered Digital Solutions</span>
+                <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                <span>Rated 5/5 by founders who ship fast</span>
               </div>
             </FadeIn>
 
             <SlideUp delay={0.2}>
               <h1 className="mb-4 text-4xl font-bold leading-tight sm:text-5xl md:text-6xl lg:text-7xl">
-                <span className="text-white">We Build</span>
+                <span className="text-white">Launch Your Web App</span>
                 <br />
-                <span className="inline-block min-w-[280px] sm:min-w-[380px] text-left">
+                <span className="inline-block min-w-[200px] sm:min-w-[280px] text-left">
                   <TypewriterText words={ROTATING_WORDS} className="text-gradient" />
                 </span>
               </h1>
             </SlideUp>
 
             <SlideUp delay={0.3}>
-              <h2 className="mb-6 text-2xl font-semibold text-neutral-200 sm:text-3xl">
-                At Lightning Speed
-              </h2>
+              <p className="mb-6 max-w-xl text-lg text-neutral-400 lg:text-xl mx-auto lg:mx-0">
+                Skip the 6-month agency timeline. Get a custom web app, e-commerce store, or AI-powered solution built and deployed in weeks — not months.
+              </p>
             </SlideUp>
 
-            <SlideUp delay={0.4}>
-              <p className="mb-8 max-w-xl text-lg text-neutral-400 lg:text-xl mx-auto lg:mx-0">
-                From AI-powered web apps to tailored e-commerce stores — we build exactly what your business needs, not what fits a template.
-              </p>
+            {/* Social proof stats */}
+            <SlideUp delay={0.35}>
+              <div className="flex flex-wrap gap-6 mb-8 justify-center lg:justify-start">
+                {QUICK_STATS.map((stat, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-green-400" />
+                    <span className="text-sm text-neutral-300">
+                      <span className="font-semibold text-white">{stat.value}</span> {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </SlideUp>
 
             <SlideUp delay={0.5}>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
                 <a href="#contact">
                   <Button size="lg" className="group">
-                    Start Your Project
+                    Book a Free Strategy Call
                     <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </a>
@@ -77,7 +92,7 @@ export default function Hero() {
                   href="#portfolio"
                   className="text-neutral-400 hover:text-primary-400 transition-colors flex items-center gap-2 text-sm font-medium"
                 >
-                  See Our Work
+                  See Results We've Delivered
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>

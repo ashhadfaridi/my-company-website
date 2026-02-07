@@ -2,52 +2,58 @@
 
 import Button from '@/components/ui/Button'
 import { SlideUp, FadeIn } from '@/components/animations'
-import { Globe, ShoppingCart, LayoutDashboard, BrainCircuit, Workflow, Wrench, Star, ArrowRight, Layers } from 'lucide-react'
+import { Globe, ShoppingCart, LayoutDashboard, BrainCircuit, Workflow, Wrench, Star, ArrowRight, Layers, Clock, CheckCircle2 } from 'lucide-react'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
 const SERVICES = [
   {
     icon: Globe,
-    title: 'Custom Websites',
-    description: 'Landing pages to full business sites — designed to convert visitors into customers.',
+    title: 'High-Converting Websites',
+    description: 'Not just pretty — built to convert. Landing pages and business sites optimized for leads, sales, and growth.',
     featured: true,
     tag: 'Most Popular',
     color: 'from-primary-500 to-cyan-400',
-  },
-  {
-    icon: ShoppingCart,
-    title: 'E-Commerce Platforms',
-    description: 'Online stores that sell, with smart inventory & AI-powered product recommendations.',
-    featured: true,
-    tag: 'High ROI',
-    color: 'from-green-500 to-emerald-400',
+    startingAt: 'Starting at $3,500',
+    deliveryTime: '2-3 weeks',
+    results: ['3x more leads', '50% faster load times'],
   },
   {
     icon: LayoutDashboard,
-    title: 'Web Applications',
-    description: 'SaaS tools, dashboards, member portals — whatever you envision, we build it.',
-    featured: false,
+    title: 'Custom Web Applications',
+    description: 'SaaS platforms, internal tools, client portals — full-stack apps built to scale with your business.',
+    featured: true,
+    tag: 'Full-Stack',
     color: 'from-accent-500 to-pink-400',
+    startingAt: 'Starting at $8,000',
+    deliveryTime: '4-6 weeks',
+    results: ['Save 20+ hrs/week', 'Built to scale'],
+  },
+  {
+    icon: ShoppingCart,
+    title: 'E-Commerce Stores',
+    description: 'Online stores that sell, with AI product recommendations and seamless checkout.',
+    featured: false,
+    color: 'from-green-500 to-emerald-400',
   },
   {
     icon: BrainCircuit,
     title: 'AI Integration',
-    description: 'Chatbots, automation, predictive analytics, and intelligent workflows.',
+    description: 'Chatbots, automation, and intelligent workflows that save time.',
     featured: false,
     color: 'from-violet-500 to-purple-400',
   },
   {
     icon: Workflow,
     title: 'Business Automation',
-    description: 'Streamline operations, connect your tools, eliminate manual work.',
+    description: 'Connect your tools and eliminate 40+ hours of manual work per week.',
     featured: false,
     color: 'from-amber-500 to-orange-400',
   },
   {
     icon: Wrench,
     title: 'Custom Solutions',
-    description: 'Have something unique in mind? We build exactly what you need.',
+    description: 'Something unique in mind? Let\'s build exactly what you need.',
     featured: false,
     color: 'from-rose-500 to-red-400',
   },
@@ -77,10 +83,10 @@ export default function WhatWeBuild() {
               <span>Our services</span>
             </div>
             <h2 className="mb-4 text-4xl font-bold text-white sm:text-5xl md:text-6xl">
-              Solutions <span className="text-gradient">Tailored to You</span>
+              What We <span className="text-gradient">Build Best</span>
             </h2>
             <p className="mx-auto max-w-2xl text-lg text-neutral-400">
-              From concept to launch, we build exactly what your business needs.
+              We specialize in two things: websites that convert and apps that scale. Everything else builds on that foundation.
             </p>
           </div>
         </SlideUp>
@@ -117,16 +123,41 @@ export default function WhatWeBuild() {
                 <h3 className="mb-3 text-2xl font-bold text-white">
                   {service.title}
                 </h3>
-                <p className="text-neutral-400 text-lg leading-relaxed mb-6">
+                <p className="text-neutral-400 text-lg leading-relaxed mb-4">
                   {service.description}
                 </p>
+
+                {/* Pricing and delivery info */}
+                {'startingAt' in service && (
+                  <div className="flex flex-wrap gap-4 mb-4">
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="font-semibold text-white">{service.startingAt}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-neutral-400">
+                      <Clock className="h-4 w-4" />
+                      <span>{service.deliveryTime}</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Results */}
+                {'results' in service && service.results && (
+                  <div className="flex flex-wrap gap-3 mb-6">
+                    {service.results.map((result: string, i: number) => (
+                      <div key={i} className="flex items-center gap-1.5 text-sm text-green-400">
+                        <CheckCircle2 className="h-4 w-4" />
+                        <span>{result}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 {/* Learn more link */}
                 <a
                   href="#contact"
                   className="inline-flex items-center gap-2 text-primary-400 hover:text-primary-300 transition-colors group/link"
                 >
-                  <span className="font-medium">Get started</span>
+                  <span className="font-medium">Get a quote</span>
                   <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1" />
                 </a>
               </div>
@@ -164,11 +195,11 @@ export default function WhatWeBuild() {
         <FadeIn delay={0.6}>
           <div className="mt-16 text-center">
             <p className="mb-6 text-lg text-neutral-300">
-              Not sure what you need? Let's talk.
+              Not sure which service fits your needs? Let's figure it out together.
             </p>
             <a href="#contact">
               <Button size="lg" className="group">
-                Get a Free Consultation
+                Book a Free Strategy Call
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </a>

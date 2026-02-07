@@ -60,10 +60,13 @@ export default function ContactCTA() {
         <SlideUp>
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-4xl font-bold text-white sm:text-5xl md:text-6xl">
-              Ready to Build Something <span className="text-gradient">Amazing</span>?
+              Let's Build Your <span className="text-gradient">Competitive Edge</span>
             </h2>
             <p className="mx-auto max-w-2xl text-lg text-neutral-400">
-              Tell us what you need — we'll handle the rest. Affordable pricing, transparent process, exceptional results.
+              Get a custom solution scoped, quoted, and started in under a week. No long contracts, no surprises — just results.
+            </p>
+            <p className="mt-4 text-sm text-neutral-500">
+              Average response time: 2 hours during business hours
             </p>
           </div>
         </SlideUp>
@@ -215,7 +218,7 @@ export default function ContactCTA() {
                   ) : (
                     <>
                       <Send className="mr-2 h-5 w-5" />
-                      Get Your Free Consultation
+                      Get Your Free Strategy Session
                     </>
                   )}
                 </Button>
