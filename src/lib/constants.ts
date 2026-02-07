@@ -115,9 +115,9 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 ]
 
 export const SOCIAL_LINKS = {
-  twitter: 'https://twitter.com/velocitylabs',
-  github: 'https://github.com/velocitylabs',
-  linkedin: 'https://linkedin.com/company/velocitylabs',
+  twitter: 'https://twitter.com/ashhadfaridi',
+  github: 'https://github.com/ashhadfaridi',
+  linkedin: 'https://linkedin.com/in/ashhadfaridi',
 } as const
 
 export const NAV_LINKS = [

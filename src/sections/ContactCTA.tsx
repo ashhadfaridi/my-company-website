@@ -27,11 +27,19 @@ export default function ContactCTA() {
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true)
     try {
-      // TODO: Replace with actual API endpoint
-      console.log('Form data:', data)
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Something went wrong')
+      }
 
       setSubmitStatus('success')
       reset()
