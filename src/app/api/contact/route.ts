@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { resend, EMAIL_FROM, EMAIL_TO } from '@/lib/resend'
+import { resend, EMAIL_FROM, EMAIL_TO, CAN_EMAIL_VISITORS } from '@/lib/resend'
 import { supabase, ContactSubmission } from '@/lib/supabase'
 
 import { PROJECT_TYPES, TIMELINES } from '@/lib/constants'
@@ -44,6 +44,16 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Without an email service or database, the inquiry would be lost.
+    // Fail loudly so the visitor is told to email us directly instead.
+    if (!resend && !supabase) {
+      console.error('Contact form: no RESEND_API_KEY or Supabase configured; inquiry not delivered')
+      return NextResponse.json(
+        { error: 'The contact form is not set up yet. Please email us directly.' },
+        { status: 503 }
+      )
+    }
+
     // Store in Supabase (if configured)
     let submissionId: string | null = null
     if (supabase) {
@@ -72,9 +82,10 @@ export async function POST(request: NextRequest) {
 
     // Send notification email to you
     if (resend) {
-      await resend.emails.send({
+      const notify = await resend.emails.send({
         from: EMAIL_FROM,
         to: EMAIL_TO,
+        replyTo: email,
         subject: `New inquiry from ${name}`,
         html: `
           <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -105,7 +116,14 @@ export async function POST(request: NextRequest) {
         `,
       })
 
-      // Send confirmation email to the user
+      if (notify.error) {
+        throw new Error(`Resend failed: ${notify.error.message}`)
+      }
+
+      // Confirmation to the visitor: only with a verified sending domain,
+      // and never fail the request over it.
+      if (CAN_EMAIL_VISITORS) {
+        try {
       await resend.emails.send({
         from: EMAIL_FROM,
         to: email,
@@ -142,6 +160,10 @@ export async function POST(request: NextRequest) {
           </div>
         `,
       })
+        } catch (err) {
+          console.error('Visitor confirmation email failed:', err)
+        }
+      }
     }
 
     return NextResponse.json({
