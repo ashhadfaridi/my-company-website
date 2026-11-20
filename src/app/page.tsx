@@ -3,6 +3,7 @@ import Footer from '@/components/layout/Footer'
 import Hero from '@/sections/Hero'
 import Industries from '@/sections/Industries'
 import Services from '@/sections/Services'
+import TechStack from '@/sections/TechStack'
 import LeadRecovery from '@/sections/LeadRecovery'
 import HowItWorks from '@/sections/HowItWorks'
 import Work from '@/sections/Work'
@@ -18,6 +19,7 @@ export default function Home() {
         <Hero />
         <Industries />
         <Services />
+        <TechStack />
         <LeadRecovery />
         <HowItWorks />
         <Work />

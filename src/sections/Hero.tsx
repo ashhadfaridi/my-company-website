@@ -1,6 +1,17 @@
 import { buttonVariants } from '@/components/ui/Button'
+import RotatingWords from '@/components/ui/RotatingWords'
 import { CalendarCheck, PackageCheck, PhoneCall } from 'lucide-react'
 import type { CSSProperties } from 'react'
+
+const BUILD_WORDS = [
+  'websites',
+  'booking systems',
+  'inventory tools',
+  'AI assistants',
+  'client portals',
+  'online stores',
+  'lead pipelines',
+]
 
 type Ticket = {
   icon: typeof CalendarCheck
@@ -52,9 +63,18 @@ export default function Hero() {
     <section id="top" className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
       <div className="mx-auto grid max-w-6xl items-center gap-14 px-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <h1 className="max-w-[16ch] text-5xl font-extrabold text-ink sm:text-6xl lg:text-[4.25rem]">
-            Technology that brings in customers and gives you back your time.
+          <h1 className="text-5xl font-extrabold text-ink sm:text-6xl lg:text-[3.6rem] xl:text-[4rem]">
+            <span className="block">We build</span>
+            <span className="block min-h-[2.2em] sm:min-h-0">
+              <RotatingWords
+                words={BUILD_WORDS}
+                className="rounded-md bg-signal px-3 pb-1 [box-decoration-break:clone] sm:whitespace-nowrap"
+              />
+            </span>
           </h1>
+          <p className="mt-5 max-w-[22ch] font-display text-2xl font-semibold leading-snug text-ink-soft sm:text-3xl">
+            that bring in customers and give you back your time.
+          </p>
           <p className="mt-7 max-w-[54ch] text-lg text-muted">
             Brightdoor Tech builds websites, booking and inventory systems, AI tools and lead
             generation for small and mid-sized businesses. One partner for all of it, with a fixed
