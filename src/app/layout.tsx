@@ -1,84 +1,48 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Geist_Mono } from "next/font/google";
+import "@fontsource-variable/bricolage-grotesque/wght.css";
+import "@fontsource/ibm-plex-sans/latin-400.css";
+import "@fontsource/ibm-plex-sans/latin-500.css";
+import "@fontsource/ibm-plex-sans/latin-600.css";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
+const title = "Velocity Labs | Websites, software, AI and lead generation for growing businesses";
+const description =
+  "Velocity Labs builds websites, online booking, inventory and custom software, AI tools and lead generation for small and mid-sized businesses, and recovers lost leads for established teams on a pay-per-conversion basis.";
 
 export const metadata: Metadata = {
   title: {
-    default: "Velocity Labs - Lightning-Fast Custom Digital Solutions",
+    default: title,
     template: "%s | Velocity Labs",
   },
-  description:
-    "We build custom web applications, AI-powered solutions, and digital products at lightning speed. Expert development team specializing in rapid deployment and cutting-edge technology.",
+  description,
   keywords: [
-    "web development",
-    "AI solutions",
+    "small business website",
+    "online booking system",
+    "inventory management software",
     "custom software",
-    "rapid development",
-    "digital agency",
-    "automation",
-    "API development",
-    "web applications",
-    "e-commerce",
+    "AI solutions for business",
+    "lead generation",
+    "lead reactivation",
+    "IT consulting",
+    "business automation",
   ],
   authors: [{ name: "Velocity Labs" }],
   creator: "Velocity Labs",
   publisher: "Velocity Labs",
-
-  // Open Graph
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://velocitylabs.co",
     siteName: "Velocity Labs",
-    title: "Velocity Labs - Lightning-Fast Custom Digital Solutions",
-    description:
-      "Custom web applications, AI solutions, and digital products built at lightning speed.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Velocity Labs - Custom Digital Solutions",
-      },
-    ],
+    title,
+    description,
   },
-
-  // Twitter
   twitter: {
     card: "summary_large_image",
-    title: "Velocity Labs - Lightning-Fast Custom Digital Solutions",
-    description:
-      "Custom web applications, AI solutions, and digital products built at lightning speed.",
-    images: ["/og-image.png"],
-    creator: "@velocitylabs",
+    title,
+    description,
   },
-
-  // Robots
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -96,21 +60,14 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Velocity Labs",
-              url: "https://velocitylabs.co",
-              logo: "https://velocitylabs.co/logo.png",
-              description: "Custom digital solutions built at lightning speed",
-              sameAs: [
-                "https://twitter.com/velocitylabs",
-                "https://github.com/velocitylabs",
-                "https://linkedin.com/company/velocitylabs",
-              ],
+              description,
+              email: "hello@velocitylabs.co",
+              founder: { "@type": "Person", name: "Ashhad Faridi" },
             }),
           }}
         />
       </head>
-      <body
-        className={`${spaceGrotesk.variable} ${geistMono.variable} font-sans antialiased`}
-      >
+      <body className="antialiased">
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>

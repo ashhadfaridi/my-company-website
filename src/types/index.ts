@@ -1,38 +1,13 @@
-/**
- * TypeScript type definitions for Velocity Labs website
- */
+import { PROJECT_TYPES, TIMELINES } from '@/lib/constants'
 
-export interface Pillar {
-  icon: string
-  title: string
-  description: string
-}
-
-export interface Service {
-  icon: string
-  title: string
-  description: string
-}
-
-export interface ProcessStep {
-  number: number
-  title: string
-  description: string
-}
-
-export interface PortfolioProject {
-  title: string
-  description: string
-  image: string
-  tags: string[]
-  industry: string
-}
+export type ProjectType = (typeof PROJECT_TYPES)[number]['value']
+export type Timeline = (typeof TIMELINES)[number]['value']
 
 export interface ContactFormData {
   name: string
   email: string
   company?: string
-  projectType: 'website' | 'ecommerce' | 'web-app' | 'ai-integration' | 'automation' | 'not-sure'
-  timeline: 'asap' | '1-2-weeks' | '1-month' | 'flexible'
+  projectType: ProjectType
+  timeline: Timeline
   message: string
 }

@@ -1,135 +1,83 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import Button from '@/components/ui/Button'
-import { Menu, X, Zap } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+import { NAV_LINKS } from '@/lib/constants'
+import { buttonVariants } from '@/components/ui/Button'
+import Logo from '@/components/layout/Logo'
 
-const NAV_LINKS = [
-  { label: 'Services', href: '#services' },
-  { label: 'Process', href: '#process' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Contact', href: '#contact' },
-]
-
-/**
- * Sticky header with backdrop blur on scroll
- */
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setIsScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
-    <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? 'py-3 bg-neutral-950/80 backdrop-blur-xl border-b border-white/5'
-            : 'py-6 bg-transparent'
-        }`}
-      >
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <a href="#" className="flex items-center gap-2 group">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center group-hover:shadow-glow-primary transition-shadow">
-                <Zap className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-white">
-                Velocity<span className="text-primary-400">Labs</span>
-              </span>
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors ${
+        isScrolled || isOpen ? 'border-b border-line bg-paper/95 backdrop-blur' : 'bg-transparent'
+      }`}
+    >
+      <div className="mx-auto flex h-18 max-w-6xl items-center justify-between px-6">
+        <a href="#top" aria-label="Velocity Labs home">
+          <Logo />
+        </a>
+
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Main">
+          {NAV_LINKS.map((link) => (
+            <a key={link.href} href={link.href} className="text-[0.95rem] font-medium text-muted hover:text-ink">
+              {link.label}
             </a>
+          ))}
+        </nav>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-neutral-400 hover:text-white transition-colors text-sm font-medium"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-
-            {/* Desktop CTA */}
-            <div className="hidden md:block">
-              <a href="#contact">
-                <Button size="sm">Start Your Project</Button>
-              </a>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-neutral-400 hover:text-white transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
-          </div>
+        <div className="hidden lg:block">
+          <a href="#contact" className={buttonVariants({ size: 'sm' })}>
+            Book a free call
+          </a>
         </div>
-      </header>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 md:hidden"
-          >
-            {/* Backdrop */}
-            <div
-              className="absolute inset-0 bg-neutral-950/95 backdrop-blur-xl"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
+        <button
+          type="button"
+          onClick={() => setIsOpen((v) => !v)}
+          className="-mr-2 p-2 text-ink lg:hidden"
+          aria-expanded={isOpen}
+          aria-controls="mobile-nav"
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        >
+          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
 
-            {/* Menu content */}
-            <nav className="relative flex flex-col items-center justify-center h-full gap-8 p-6">
-              {NAV_LINKS.map((link, index) => (
-                <motion.a
-                  key={link.href}
+      {isOpen && (
+        <nav id="mobile-nav" className="border-t border-line bg-paper px-6 pb-8 pt-4 lg:hidden" aria-label="Mobile">
+          <ul className="flex flex-col">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <a
                   href={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-2xl font-semibold text-white hover:text-primary-400 transition-colors"
+                  onClick={() => setIsOpen(false)}
+                  className="block border-b border-line py-4 font-display text-xl font-semibold text-ink"
                 >
                   {link.label}
-                </motion.a>
-              ))}
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button size="lg">Start Your Project</Button>
                 </a>
-              </motion.div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="#contact"
+            onClick={() => setIsOpen(false)}
+            className={`${buttonVariants({ size: 'lg' })} mt-6 w-full`}
+          >
+            Book a free call
+          </a>
+        </nav>
+      )}
+    </header>
   )
 }
