@@ -11,7 +11,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="w-full">
         <input
           className={cn(
-            'flex h-12 w-full rounded-lg glass px-4 py-2 text-base text-neutral-50 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-200',
+            'flex h-12 w-full rounded-md border border-line bg-panel px-4 py-2 text-base text-ink placeholder:text-ink0 focus:outline-none focus:border-ink focus:ring-2 focus:ring-signal transition-colors',
             error && 'ring-2 ring-error',
             className
           )}

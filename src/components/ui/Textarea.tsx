@@ -12,7 +12,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       <div className="w-full">
         <textarea
           className={cn(
-            'flex min-h-[120px] w-full rounded-lg glass px-4 py-3 text-base text-neutral-50 placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-200 resize-none',
+            'flex min-h-[120px] w-full rounded-md border border-line bg-panel px-4 py-3 text-base text-ink placeholder:text-ink0 focus:outline-none focus:border-ink focus:ring-2 focus:ring-signal transition-colors resize-none',
             error && 'ring-2 ring-error',
             className
           )}

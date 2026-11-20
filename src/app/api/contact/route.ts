@@ -2,28 +2,30 @@ import { NextRequest, NextResponse } from 'next/server'
 import { resend, EMAIL_FROM, EMAIL_TO } from '@/lib/resend'
 import { supabase, ContactSubmission } from '@/lib/supabase'
 
-// Project type labels for email
-const PROJECT_TYPE_LABELS: Record<string, string> = {
-  website: 'Custom Website',
-  ecommerce: 'E-Commerce Platform',
-  'web-app': 'Web Application',
-  'ai-integration': 'AI Integration',
-  automation: 'Business Automation',
-  'not-sure': 'Not Sure Yet',
-}
+import { PROJECT_TYPES, TIMELINES } from '@/lib/constants'
 
-// Timeline labels for email
-const TIMELINE_LABELS: Record<string, string> = {
-  asap: 'ASAP',
-  '1-2-weeks': '1-2 Weeks',
-  '1-month': '1 Month',
-  flexible: 'Flexible',
+const PROJECT_TYPE_LABELS: Record<string, string> = Object.fromEntries(
+  PROJECT_TYPES.map((p) => [p.value, p.label])
+)
+const TIMELINE_LABELS: Record<string, string> = Object.fromEntries(
+  TIMELINES.map((t) => [t.value, t.label])
+)
+
+/** Escape user input before placing it in email HTML. */
+function esc(value: unknown): string {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
 }
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { name, email, company, projectType, timeline, message } = body
+    const safe = { name: esc(name), email: esc(email), company: esc(company), message: esc(message) }
 
     // Validate required fields
     if (!name || !email || !projectType || !timeline || !message) {
@@ -73,29 +75,29 @@ export async function POST(request: NextRequest) {
       await resend.emails.send({
         from: EMAIL_FROM,
         to: EMAIL_TO,
-        subject: `New Project Inquiry from ${name}`,
+        subject: `New inquiry from ${name}`,
         html: `
           <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #00BCFF; border-bottom: 2px solid #00BCFF; padding-bottom: 10px;">
+            <h1 style="color: #14213d; border-bottom: 2px solid #14213d; padding-bottom: 10px;">
               New Project Inquiry
             </h1>
 
             <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h2 style="margin-top: 0; color: #333;">Contact Details</h2>
-              <p><strong>Name:</strong> ${name}</p>
-              <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-              ${company ? `<p><strong>Company:</strong> ${company}</p>` : ''}
+              <p><strong>Name:</strong> ${safe.name}</p>
+              <p><strong>Email:</strong> <a href="mailto:${safe.email}">${safe.email}</a></p>
+              ${company ? `<p><strong>Company:</strong> ${safe.company}</p>` : ''}
             </div>
 
             <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h2 style="margin-top: 0; color: #333;">Project Details</h2>
-              <p><strong>Project Type:</strong> ${PROJECT_TYPE_LABELS[projectType] || projectType}</p>
-              <p><strong>Timeline:</strong> ${TIMELINE_LABELS[timeline] || timeline}</p>
+              <p><strong>Project Type:</strong> ${esc(PROJECT_TYPE_LABELS[projectType] || projectType)}</p>
+              <p><strong>Timeline:</strong> ${esc(TIMELINE_LABELS[timeline] || timeline)}</p>
             </div>
 
             <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h2 style="margin-top: 0; color: #333;">Message</h2>
-              <p style="white-space: pre-wrap;">${message}</p>
+              <p style="white-space: pre-wrap;">${safe.message}</p>
             </div>
 
             ${submissionId ? `<p style="color: #666; font-size: 12px;">Submission ID: ${submissionId}</p>` : ''}
@@ -107,10 +109,10 @@ export async function POST(request: NextRequest) {
       await resend.emails.send({
         from: EMAIL_FROM,
         to: email,
-        subject: "We've received your inquiry - Velocity Labs",
+        subject: "We've received your inquiry - Brightdoor Tech",
         html: `
           <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #00BCFF;">Thanks for reaching out, ${name}!</h1>
+            <h1 style="color: #14213d;">Thanks for reaching out, ${safe.name}!</h1>
 
             <p>We've received your project inquiry and are excited to learn more about what you're building.</p>
 
@@ -118,16 +120,16 @@ export async function POST(request: NextRequest) {
 
             <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h2 style="margin-top: 0; color: #333;">Your Inquiry Summary</h2>
-              <p><strong>Project Type:</strong> ${PROJECT_TYPE_LABELS[projectType] || projectType}</p>
-              <p><strong>Timeline:</strong> ${TIMELINE_LABELS[timeline] || timeline}</p>
+              <p><strong>Project Type:</strong> ${esc(PROJECT_TYPE_LABELS[projectType] || projectType)}</p>
+              <p><strong>Timeline:</strong> ${esc(TIMELINE_LABELS[timeline] || timeline)}</p>
               <p><strong>Message:</strong></p>
-              <p style="white-space: pre-wrap; color: #666;">${message}</p>
+              <p style="white-space: pre-wrap; color: #666;">${safe.message}</p>
             </div>
 
             <p>In the meantime, feel free to book a call directly:</p>
             <p>
-              <a href="https://cal.com/velocitylabs/discovery"
-                 style="display: inline-block; background: #00BCFF; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+              <a href="https://cal.com/savage-bfeykg/15min"
+                 style="display: inline-block; background: #14213d; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
                 Book a Discovery Call
               </a>
             </p>
@@ -135,7 +137,7 @@ export async function POST(request: NextRequest) {
             <p style="color: #666; margin-top: 30px;">
               Best regards,<br>
               <strong>Ashhad Faridi</strong><br>
-              Founder, Velocity Labs
+              Founder, Brightdoor Tech
             </p>
           </div>
         `,

@@ -1,33 +1,33 @@
 import Header from '@/components/layout/Header'
-import Hero from '@/sections/Hero'
-import SocialProof from '@/sections/SocialProof'
-import WhatMakesUsDifferent from '@/sections/WhatMakesUsDifferent'
-import WhatWeBuild from '@/sections/WhatWeBuild'
-import Portfolio from '@/sections/Portfolio'
-import HowItWorks from '@/sections/HowItWorks'
-import Founder from '@/sections/Founder'
-import ContactCTA from '@/sections/ContactCTA'
 import Footer from '@/components/layout/Footer'
+import Hero from '@/sections/Hero'
+import Industries from '@/sections/Industries'
+import Services from '@/sections/Services'
+import TechStack from '@/sections/TechStack'
+import LeadRecovery from '@/sections/LeadRecovery'
+import HowItWorks from '@/sections/HowItWorks'
+import Work from '@/sections/Work'
+import Founder from '@/sections/Founder'
+import FAQ from '@/sections/FAQ'
+import ContactCTA from '@/sections/ContactCTA'
 
-/**
- * Velocity Labs Homepage
- * Modern, AI-focused company website with smooth scrolling and animations
- */
 export default function Home() {
   return (
     <>
       <Header />
-      <main className="min-h-screen">
+      <main>
         <Hero />
-        <SocialProof />
-        <WhatMakesUsDifferent />
-        <WhatWeBuild />
-        <Portfolio />
+        <Industries />
+        <Services />
+        <TechStack />
+        <LeadRecovery />
         <HowItWorks />
+        <Work />
         <Founder />
+        <FAQ />
         <ContactCTA />
-        <Footer />
       </main>
+      <Footer />
     </>
   )
 }
