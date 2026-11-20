@@ -6,14 +6,14 @@ import "@fontsource/ibm-plex-sans/latin-600.css";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 
-const title = "Velocity Works | Websites, software, AI and lead generation for growing businesses";
+const title = "Brightdoor Tech | Websites, software, AI and lead generation for growing businesses";
 const description =
-  "Velocity Works builds websites, online booking, inventory and custom software, AI tools and lead generation for small and mid-sized businesses, and recovers lost leads for established teams on a pay-per-conversion basis.";
+  "Brightdoor Tech builds websites, online booking, inventory and custom software, AI tools and lead generation for small and mid-sized businesses, and recovers lost leads for established teams on a pay-per-conversion basis.";
 
 export const metadata: Metadata = {
   title: {
     default: title,
-    template: "%s | Velocity Works",
+    template: "%s | Brightdoor Tech",
   },
   description,
   keywords: [
@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     "IT consulting",
     "business automation",
   ],
-  authors: [{ name: "Velocity Works" }],
-  creator: "Velocity Works",
-  publisher: "Velocity Works",
+  authors: [{ name: "Brightdoor Tech" }],
+  creator: "Brightdoor Tech",
+  publisher: "Brightdoor Tech",
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Velocity Works",
+    siteName: "Brightdoor Tech",
     title,
     description,
   },
@@ -59,9 +59,9 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Velocity Works",
+              name: "Brightdoor Tech",
               description,
-              email: "hello@velocitylabs.co",
+              email: "hello@brightdoortech.com",
               founder: { "@type": "Person", name: "Ashhad Faridi" },
             }),
           }}

@@ -109,7 +109,7 @@ export async function POST(request: NextRequest) {
       await resend.emails.send({
         from: EMAIL_FROM,
         to: email,
-        subject: "We've received your inquiry - Velocity Works",
+        subject: "We've received your inquiry - Brightdoor Tech",
         html: `
           <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto;">
             <h1 style="color: #14213d;">Thanks for reaching out, ${safe.name}!</h1>
@@ -137,7 +137,7 @@ export async function POST(request: NextRequest) {
             <p style="color: #666; margin-top: 30px;">
               Best regards,<br>
               <strong>Ashhad Faridi</strong><br>
-              Founder, Velocity Works
+              Founder, Brightdoor Tech
             </p>
           </div>
         `,

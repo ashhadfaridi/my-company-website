@@ -58,7 +58,7 @@ export default function Founder() {
             <p>
               I also run a bookkeeping and tax practice, so I see every day how much time small
               businesses lose to paperwork, missed follow-ups and tools that do not talk to each
-              other. Velocity Works exists to fix that with technology that is simple to use and
+              other. Brightdoor Tech exists to fix that with technology that is simple to use and
               priced for real businesses.
             </p>
             <p>When you work with us, you talk directly to the person building your project.</p>

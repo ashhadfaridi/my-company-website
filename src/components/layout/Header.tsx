@@ -24,7 +24,7 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex h-18 max-w-6xl items-center justify-between px-6">
-        <a href="#top" aria-label="Velocity Works home">
+        <a href="#top" aria-label="Brightdoor Tech home">
           <Logo />
         </a>
 

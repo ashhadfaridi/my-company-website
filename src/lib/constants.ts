@@ -1,6 +1,6 @@
 export const COMPANY = {
-  name: 'Velocity Works',
-  email: 'hello@velocitylabs.co',
+  name: 'Brightdoor Tech',
+  email: 'hello@brightdoortech.com',
   description:
     'Websites, custom software, AI and lead generation for small and mid-sized businesses.',
 } as const
