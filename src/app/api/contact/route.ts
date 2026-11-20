@@ -44,6 +44,16 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Without an email service or database, the inquiry would be lost.
+    // Fail loudly so the visitor is told to email us directly instead.
+    if (!resend && !supabase) {
+      console.error('Contact form: no RESEND_API_KEY or Supabase configured; inquiry not delivered')
+      return NextResponse.json(
+        { error: 'The contact form is not set up yet. Please email us directly.' },
+        { status: 503 }
+      )
+    }
+
     // Store in Supabase (if configured)
     let submissionId: string | null = null
     if (supabase) {
