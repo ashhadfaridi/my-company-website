@@ -6,14 +6,14 @@ import "@fontsource/ibm-plex-sans/latin-600.css";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 
-const title = "Velocity Labs | Websites, software, AI and lead generation for growing businesses";
+const title = "Velocity Works | Websites, software, AI and lead generation for growing businesses";
 const description =
-  "Velocity Labs builds websites, online booking, inventory and custom software, AI tools and lead generation for small and mid-sized businesses, and recovers lost leads for established teams on a pay-per-conversion basis.";
+  "Velocity Works builds websites, online booking, inventory and custom software, AI tools and lead generation for small and mid-sized businesses, and recovers lost leads for established teams on a pay-per-conversion basis.";
 
 export const metadata: Metadata = {
   title: {
     default: title,
-    template: "%s | Velocity Labs",
+    template: "%s | Velocity Works",
   },
   description,
   keywords: [
@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     "IT consulting",
     "business automation",
   ],
-  authors: [{ name: "Velocity Labs" }],
-  creator: "Velocity Labs",
-  publisher: "Velocity Labs",
+  authors: [{ name: "Velocity Works" }],
+  creator: "Velocity Works",
+  publisher: "Velocity Works",
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Velocity Labs",
+    siteName: "Velocity Works",
     title,
     description,
   },
@@ -59,7 +59,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Velocity Labs",
+              name: "Velocity Works",
               description,
               email: "hello@velocitylabs.co",
               founder: { "@type": "Person", name: "Ashhad Faridi" },

@@ -9,7 +9,7 @@ export default function Logo({ light = false }: { light?: boolean }) {
         <path d="M8 9l6 6-6 6M15 9l6 6-6 6" fill="none" stroke="#ffc83d" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
       <span className={`font-display text-xl font-bold tracking-tight ${light ? 'text-white' : 'text-ink'}`}>
-        Velocity Labs
+        Velocity Works
       </span>
     </span>
   )

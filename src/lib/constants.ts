@@ -1,5 +1,5 @@
 export const COMPANY = {
-  name: 'Velocity Labs',
+  name: 'Velocity Works',
   email: 'hello@velocitylabs.co',
   description:
     'Websites, custom software, AI and lead generation for small and mid-sized businesses.',

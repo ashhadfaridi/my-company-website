@@ -56,7 +56,7 @@ export default function Hero() {
             Technology that brings in customers and gives you back your time.
           </h1>
           <p className="mt-7 max-w-[54ch] text-lg text-muted">
-            Velocity Labs builds websites, booking and inventory systems, AI tools and lead
+            Velocity Works builds websites, booking and inventory systems, AI tools and lead
             generation for small and mid-sized businesses. One partner for all of it, with a fixed
             price before any work starts.
           </p>

@@ -6,5 +6,5 @@ export const resend = process.env.RESEND_API_KEY
   : null
 
 // Email configuration
-export const EMAIL_FROM = 'Velocity Labs <noreply@velocitylabs.co>'
+export const EMAIL_FROM = 'Velocity Works <noreply@velocitylabs.co>'
 export const EMAIL_TO = process.env.CONTACT_EMAIL || 'hello@velocitylabs.co'
